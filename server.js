@@ -89,9 +89,7 @@ app.get('/games/:id', (req, res, next) => {
 
         if(foundGame) {
             console.log("Game found and displayed");
-            //formatted the string so it is a bit more readable.
             res.json(foundGame);
-            //res.json(JSON.stringify(foundGame, null, '\t'));
         }
         else {
             //Send an error message if a number doesn't match
@@ -106,20 +104,10 @@ app.get('/games/report', (req, res, next) => {
     //Return summary of the games
     console.log("Showing the game report");
 
-    
-
-    //The user with the most comments accross all games
-
-    //Average likes per game rounded up to the nearest int
-
-
-    //The game with the highest sum of likes
     var payload = listOfGames();
-    console.log(payload);
-
     res.status(202).send(payload);
 
-})
+});
 
 console.log('Games service listing on port 8080');
 app.listen(port);

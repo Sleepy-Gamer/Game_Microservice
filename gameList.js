@@ -67,8 +67,6 @@ module.exports = function gameList() {
         }
     ];
 
-
-
     //This function will determine which user has the most comments.
     function mostCommentsByUser(array) {
         if(array.length === 0) {
@@ -85,14 +83,11 @@ module.exports = function gameList() {
             else {
                 mode[element]++;
             }
-            if(mode[element] > maxCount)
-            {
+            if(mode[element] > maxCount) {
                 mostCommentsUser = element;
                 maxCount = mode[element];
             }
         }
-
-        console.log("This is the user with the most comments: ", mostCommentsUser);
         return mostCommentsUser;
     }
 
@@ -106,7 +101,6 @@ module.exports = function gameList() {
                 gameWithHighestLikes = games[item].title;
             }
         }
-
         return gameWithHighestLikes;
     }
 
@@ -125,15 +119,13 @@ module.exports = function gameList() {
         gameTitles.push(games[item].title);
     }
 
-
     const calculatedAverageNumberOfLikesPerGame = [];
-
 
     function averageLikesPerGame() {
         for(item in gameTitles) {
             var count = 0;
             for(comments in games[item].comments) {
-                var like = parseInt(games[item].comments[comments].like)
+                var like = parseInt(games[item].comments[comments].like);
                 count++
             }
             var averageLikes = like / count;
@@ -150,8 +142,6 @@ module.exports = function gameList() {
 
     console.log("This is the average number of likes per game", calculatedAaverageNumberOfLikesPerGame);
 
-
-
     for(item in gameTitles){
         var payload = {
             "User with the most comments" : userWithMostComments,
@@ -162,9 +152,7 @@ module.exports = function gameList() {
                 average_likes : calculatedAverageNumberOfLikesPerGame[item]
                 }
             };
-
     }
-    
-    return payload;
 
+    return payload;
 }
