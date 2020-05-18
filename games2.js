@@ -1,15 +1,9 @@
 const express = require('express');
-const path = require('path');
 const bodyParser = require('body-parser');
 
 const port = 8080;
 const app = express();
 app.use(bodyParser.json());
-var router = express.Router();
-var gameNumber = process.argv.slice(2)[0];
-
-//var routes = require('.api/routes');
-//routes(app);
 
 const games = [
     {
@@ -54,37 +48,40 @@ const games = [
         }]
     }
 ];
-
-app.get('/games/:id', (req, res) => {
+app.get('/games/:id', (req, res, next) => {
+    //Take in the parameter
     const item = req.params.id;
+    //Turn the string into an int for matching
     const gameNumber = parseInt(req.params.id);
     console.log("This is req params", item);
-    console.log("This is the game number:", gameNumber)
-    const foundGame = games.find(subject => subject.id == gameNumber);
 
-    //Send an error message if a number doesn't match
-    if(foundGame){
-        console.log("Game found and displayed");
-        //formatted the string so it is a bit more readable.
-        res.json(foundGame);
-        //res.json(JSON.stringify(foundGame, null, '\t'));
+    //if the req.params matches the word report, go to the next route
+    if(req.params.id == "report") {
+        next();
     }
-    else{
-        console.log("A game with that ID does not exist");
-        res.status(404).send();
+    else {
+        //if it doesn't match, serach for the game that matches the ID supplied.
+        console.log("This is the game ID number:", gameNumber)
+        const foundGame = games.find(subject => subject.id == gameNumber);
+
+        if(foundGame) {
+            console.log("Game found and displayed");
+            //formatted the string so it is a bit more readable.
+            res.json(foundGame);
+            //res.json(JSON.stringify(foundGame, null, '\t'));
+        }
+        else {
+            //Send an error message if a number doesn't match
+            console.log("A game with that ID does not exist");
+            res.status(404).send();
+        }
     }
     
 });
 
-app.get('/games/report', (req, res) => {
+app.get('/games/report', (req, res, next) => {
     //Return summary of the games
     console.log("Showing the game report");
-
-    for(let attribute in games) {
-        if(req.body[attribute]) {
-            console.log(req.body[attribute], '\n');
-        }
-    }
 
     res.status(202).send(games);
     //The game with the highest sum of likes
