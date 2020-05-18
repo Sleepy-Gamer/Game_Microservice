@@ -10,4 +10,5 @@ The program should show a message in the command prompt window saying: "Game ser
 
 Open a browser window in Chrome or similar. 
 Navigate to http://localhost:8080/games/report or http://localhost:8080/games/1 (or a number of your choice)
+There are 3 games, but if you type in something else a 404 should pop up.
 
