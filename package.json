@@ -2,7 +2,7 @@
   "name": "companies-house",
   "version": "1.0.0",
   "description": "Companies House Tech Test",
-  "main": "games2.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
